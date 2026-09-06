@@ -14,12 +14,10 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/customers", customerRoutes);
 
-const port = process.env.PORT || 3000;
-
-if (process.env.VERCEL !== "1") {
-  app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.get("/", (req, res) => {
+  res.json({
+    message: "Sales API is running"
   });
-}
+});
 
 export default app;
