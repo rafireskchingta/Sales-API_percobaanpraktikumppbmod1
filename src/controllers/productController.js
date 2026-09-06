@@ -21,6 +21,16 @@ export const ProductController = {
 
   async create(req, res) {
     try {
+      const { price, stock } = req.body;
+
+      // Validasi manual: harga atau stok tidak boleh di bawah nol
+      if (price < 0) {
+        return res.status(400).json({ error: "Harga produk tidak boleh di bawah nol." });
+      }
+      if (stock < 0) {
+        return res.status(400).json({ error: "Stok produk tidak boleh di bawah nol." });
+      }
+
       const product = await ProductModel.create(req.body);
       res.status(201).json(product);
     } catch (err) {
